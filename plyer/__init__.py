@@ -64,6 +64,9 @@ orientation = Proxy('orientation', facades.Orientation)
 #: Notification proxy to :class:`plyer.facades.Notification`
 notification = Proxy('notification', facades.Notification)
 
+#: NSD proxy to :class:`plyer.facades.NSD`
+nsd = Proxy('nsd', facades.NSD)
+
 #: Proximity proxy to :class:`plyer.facades.Proximity`
 proximity = Proxy('proximity', facades.Proximity)
 

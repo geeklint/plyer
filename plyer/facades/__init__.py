@@ -8,8 +8,8 @@ Interface of all the features available.
 
 __all__ = ('Accelerometer', 'Audio', 'Barometer', 'Battery', 'Call', 'Camera',
            'Compass', 'Email', 'FileChooser', 'GPS', 'Gravity', 'Gyroscope',
-           'IrBlaster', 'Light', 'Orientation', 'Notification', 'Proximity',
-           'Sms', 'TTS', 'UniqueID', 'Vibrator', 'Wifi', 'Flash',
+           'IrBlaster', 'Light', 'Orientation', 'Notification', 'NSD'
+           'Proximity', 'Sms', 'TTS', 'UniqueID', 'Vibrator', 'Wifi', 'Flash',
            'Temperature', 'SpatialOrientation', 'Brightness')
 
 from plyer.facades.accelerometer import Accelerometer
@@ -30,6 +30,7 @@ from plyer.facades.light import Light
 from plyer.facades.proximity import Proximity
 from plyer.facades.orientation import Orientation
 from plyer.facades.notification import Notification
+from plyer.facades.nsd import NSD
 from plyer.facades.sms import Sms
 from plyer.facades.tts import TTS
 from plyer.facades.uniqueid import UniqueID
