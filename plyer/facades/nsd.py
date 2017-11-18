@@ -13,6 +13,11 @@ Supported Platforms
 
 
 '''
+from collections import namedtuple
+
+ServiceInfoBase = namedtuple(
+    'ServiceInfoBase',
+    'host, port, service_name, service_type, attributes, _internal')
 
 
 class NSD(object):
@@ -20,52 +25,70 @@ class NSD(object):
     Network service discovery facade.
     '''
 
-    def register_service(self, service_info, proto, cb):
+    class ServiceInfo(ServiceInfoBase):
+        '''
+        Use this class to descibe the service.
+        '''
+        def __init__(self, name, type_=None, port=None, attributes=None):
+            if type_ is None:
+                type_ = ''.join((name.lower(), '._tcp'))
+            if attributes is None:
+                attributes = dict()
+            super(NSD.ServiceInfo, self).__init__(
+                None, port, name, type_, attributes)
+
+    def register_service(self, service_info, listener):
         '''
         Register local services to be advertised
 
-        :param service_info:
-        :param proto:
+        :param service_info: The service to register
+        :param listener: methods to be called on events
 
-        :type service_info:
-        :type proto: int
+        :type service_info: :class:`NSD.ServiceInfo`
+        :type listener: TODO
         '''
-        self._register_service(service_info, proto, cb)
+        self._register_service(service_info, listener)
 
-    def unregister_service(self, ):
+    def unregister_service(self, listener):
         '''
         Unregister a previously-registered service
         '''
-        self._unregister_service()
+        self._unregister_service(listener)
 
-    def discover_services(self, service, proto, cb):
+    def discover_services(self, service, listener):
         '''
         Initiate service discovery to browse for instances of a service type.
-        '''
-        self._discover_services(service, proto, cb)
 
-    def resolve_service(self, service_info, cb):
+        :param service: The service to look for
+        :param listener: Listener to handle results
+
+        :type service_info: string
+        :type listener: TODO
+        '''
+        self._discover_services(service, listener)
+
+    def resolve_service(self, service_info, listener):
         '''
         Resolve a discovered service.
 
-        :param service_info:
-        :param proto:
+        :param service_info: The discovered info object
+        :param listener: Listener to handle results
 
-        :type service_info:
-        :type proto: int
+        :type service_info: TODO
+        :type listener: TODO
         '''
-        self._resolve_service(service_info, cb)
+        self._resolve_service(service_info, listener)
 
     # private
 
-    def _register_service(self, service_info, proto, cb):
+    def _register_service(self, service_info, listener):
         raise NotImplementedError()
 
-    def _unregister_service(self, ):
+    def _unregister_service(self, listener):
         raise NotImplementedError()
 
-    def _discover_services(self, service, proto, cb):
+    def _discover_services(self, service, listener):
         raise NotImplementedError()
 
-    def _resolve_service(self, service_info, cb):
+    def _resolve_service(self, service_info, listener):
         raise NotImplementedError()
