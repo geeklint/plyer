@@ -4,20 +4,26 @@ Plyer
 
 '''
 
+
 __all__ = ('accelerometer', 'audio', 'barometer', 'battery', 'call', 'camera',
            'compass', 'email', 'filechooser', 'flash', 'gps', 'gravity',
            'gyroscope', 'irblaster', 'light', 'orientation', 'notification',
            'proximity', 'sms', 'tts', 'uniqueid', 'vibrator', 'wifi',
-           'temperature', 'spatialorientation', 'brightness')
+           'temperature', 'humidity', 'spatialorientation', 'brightness',
+           'storagepath', 'processors', 'bluetooth', 'screenshot')
 
-__version__ = '1.3.1dev'
+__version__ = '1.3.2.dev0'
 
 
 from plyer import facades
 from plyer.utils import Proxy
 
+# pylint: disable=invalid-name
 #: Accelerometer proxy to :class:`plyer.facades.Accelerometer`
 accelerometer = Proxy('accelerometer', facades.Accelerometer)
+
+#: Keyring proxy to :class::`plyer.facades.Keyring`
+keystore = Proxy('keystore', facades.Keystore)
 
 #: Audio proxy to :class:`plyer.facades.Audio`
 audio = Proxy('audio', facades.Audio)
@@ -91,8 +97,22 @@ wifi = Proxy('wifi', facades.Wifi)
 #: Temperature proxy to :class:`plyer.facades.Temperature`
 temperature = Proxy('temperature', facades.Temperature)
 
+#: Humidity proxy to :class:`plyer.facades.Humidity`
+humidity = Proxy('humidity', facades.Humidity)
 #: SpatialOrientation proxy to :class:`plyer.facades.SpatialOrientation`
 spatialorientation = Proxy('spatialorientation', facades.SpatialOrientation)
 
 #: Brightness proxy to :class:`plyer.facades.Brightness`
 brightness = Proxy('brightness', facades.Brightness)
+
+#: StoragePath proxy to :class:`plyer.facades.StoragePath`
+storagepath = Proxy('storagepath', facades.StoragePath)
+
+#: Bluetooth proxy to :class:`plyer.facades.Bluetooth`
+bluetooth = Proxy('bluetooth', facades.Bluetooth)
+
+#: Processors proxy to :class:`plyer.facades.Processors`
+processors = Proxy('processors', facades.Processors)
+
+#: Screenshot proxy to :class:`plyer.facades.Screenshot`
+screenshot = Proxy('screenshot', facades.Screenshot)

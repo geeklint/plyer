@@ -26,8 +26,6 @@ class OSXWifi(Wifi):
         '''
         Returns all the network information.
         '''
-        def ns(x):
-            NSString.alloc().initWithUTF8String_(x)
 
         accessNetworkType = self.names[name].accessNetworkType
         aggregateRSSI = self.names[name].aggregateRSSI
@@ -68,13 +66,13 @@ class OSXWifi(Wifi):
                 'hessid': hessid,
                 'ibss': ibss,
                 'isAdditionalStepRequiredForAccess':
-                    isAdditionalStepRequiredForAccess,
+                isAdditionalStepRequiredForAccess,
                 'isCarPlayNetwork': isCarPlayNetwork,
                 'isEmergencyServicesReachable': isEmergencyServicesReachable,
                 'isPasspoint': isPasspoint,
                 'isPersonalHotspot': isPersonalHotspot,
                 'isUnauthenticatedEmergencyServiceAccessible':
-                    isUnauthenticatedEmergencyServiceAccessible,
+                isUnauthenticatedEmergencyServiceAccessible,
                 'noiseMeasurement': noiseMeasurement,
                 'physicalLayerMode': physicalLayerMode,
                 'rssiValue': rssiValue,

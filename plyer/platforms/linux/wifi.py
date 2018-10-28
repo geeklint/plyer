@@ -12,7 +12,7 @@
 '''
 
 from plyer.facades import Wifi
-from subprocess import Popen, PIPE, call, STDOUT
+from subprocess import Popen, PIPE, call
 
 
 class LinuxWifi(Wifi):
@@ -23,7 +23,7 @@ class LinuxWifi(Wifi):
         Returns `True` if wifi is enabled else `False`.
         '''
         enbl = Popen(["nmcli", "radio", "wifi"], stdout=PIPE, stderr=PIPE)
-        if enbl.communicate()[0].split()[0] == "enabled":
+        if enbl.communicate()[0].split()[0].decode() == "enabled":
             return True
         return False
 
@@ -72,12 +72,17 @@ class LinuxWifi(Wifi):
             - parameters:
                 - password: dict type
         '''
+
+        result = None
         try:
             call(['nmcli', 'nm', 'enable', 'true'])
         finally:
             password = parameters['password']
             cell = self.names[network]
-            return wifi.Scheme.for_cell('wlan0', network, cell, password)
+            result = wifi.Scheme.for_cell(
+                'wlan0', network, cell, password
+            )
+        return result
 
     def _disconnect(self):
         '''
@@ -89,7 +94,7 @@ class LinuxWifi(Wifi):
 def instance():
     import sys
     try:
-        import wifi
+        import wifi  # pylint: disable=unused-variable
         return LinuxWifi()
     except ImportError:
         sys.stderr.write("python-wifi not installed. try:"

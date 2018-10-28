@@ -23,12 +23,14 @@ Android, Windows, OS X, Linux
 
 
 class Notification(object):
+    # pylint: disable=too-few-public-methods
     '''
     Notification facade.
     '''
 
     def notify(self, title='', message='', app_name='', app_icon='',
                timeout=10, ticker=''):
+        # pylint: disable=too-many-arguments
         '''
         Send a notification.
 
@@ -45,6 +47,10 @@ class Notification(object):
         :type app_icon: str
         :type timeout: int
         :type ticker: str
+
+        .. note::
+           When called on Windows, ``app_icon`` has to be a path to
+           a file in .ICO format.
         '''
 
         self._notify(title=title, message=message, app_icon=app_icon,
