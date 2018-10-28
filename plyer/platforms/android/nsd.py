@@ -49,7 +49,7 @@ def service_info_topy(javains):
     Convert java NsdServiceInfo to NSD.ServiceInfo
     '''
     pyins = NSD.ServiceInfo(None)
-    pyins._internal = javains
+    pyins.data = javains
     pyins.host = javains.getHost().getHostAddress()
     pyins.port = javains.getPort()
     pyins.service_name = javains.getServiceName()
@@ -59,9 +59,9 @@ def service_info_topy(javains):
 
 
 def service_info_tojava(pyins):
-    if pyins._internal is not None:
-        return pyins._internal
-    javains = pyins._internal = NsdServiceInfo()
+    if pyins.data is not None:
+        return pyins.data
+    javains = pyins.data = NsdServiceInfo()
     javains.setServiceName(pyins.service_name)
     javains.setServiceType(pyins.service_type)
     javains.setPort(pyins.port)

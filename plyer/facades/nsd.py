@@ -17,7 +17,7 @@ from collections import namedtuple
 
 ServiceInfoBase = namedtuple(
     'ServiceInfoBase',
-    'host, port, service_name, service_type, attributes, _internal')
+    'host, port, service_name, service_type, attributes, data')
 
 
 class NSD(object):
@@ -29,9 +29,14 @@ class NSD(object):
         '''
         Use this class to descibe the service.
         '''
-        def __init__(self, name, type_=None, port=None, attributes=None):
-            if type_ is None:
-                type_ = ''.join((name.lower(), '._tcp'))
+        def __new__(cls, name, **kwargs):
+            kwargs['service_name'] = name
+            kwargs.setdefault('service_type', ''.join((name.lower(), '._tcp')))
+            kwargs.setdefault('host', None)
+            kwargs.setdefault('port', None)
+            kwargs.setdefault('attributes', dict())
+            kwargs.setdefault('data', None)
+        def __init__(self, ):
             if attributes is None:
                 attributes = dict()
             super(NSD.ServiceInfo, self).__init__(
